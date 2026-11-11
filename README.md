@@ -19,6 +19,7 @@ GTFS feed, with how late each one usually runs. Collected by **reclaim.city** fo
 | [`data/service_days.csv.gz`](data/service_days.csv.gz) | per service and day: the bus that ran it, depot, service type, start/end delay, GPS fixes | 407,547 rows (2026-11-03 to 2026-11-11) |
 | [`data/stats/`](data/stats/) | `punctuality_by_depot.csv`, `punctuality_by_type.csv` (median and 80th-percentile delay at the last stop, % on time −2…+5 min), `coverage.csv` (services, buses and depots per day), `fleet_by_depot.csv` (buses and services by depot and type) | |
 | `data/web/` | the live map's own network files (stops, services with timetables and delays, road segments) | |
+| [`data/realtime/`](data/realtime/) | **GTFS-Realtime** samples: VehiclePositions and TripUpdates (`.pb`, and `.json.gz` to read) — see below | |
 | `data/stats.json` | the numbers on this page | |
 | `tools/` | how this repo is built from the collected data (`build_apsrtc.py`, `charts.py`, `readme.py`); the collectors are not published | |
 
@@ -36,6 +37,22 @@ GTFS feed, with how late each one usually runs. Collected by **reclaim.city** fo
 - **De-duplicated**: one trip per service; the Neo2308 community GTFS (Aug 2026) is merged only where it
   has a service we do not (462 trips, route ids `neo-…`).
 - No driver data is in this repository, and none was ever collected into it.
+
+## GTFS-Realtime
+
+Standard **GTFS-RT 2.0** Protocol Buffer feeds, built from the same live data as the map, with ids that match the
+static GTFS above: **VehiclePositions** (every live bus: position, bearing, speed, vehicle number, and its trip and
+route where known) and **TripUpdates** (arrival time and delay at each stop still ahead).
+
+| Feed | Sample in this repo | Snapshot |
+|---|---|---|
+| VehiclePositions | [`data/realtime/vehicle_positions.pb`](data/realtime/vehicle_positions.pb) (+ `.json.gz`) | 7,433 buses, 6,219 on a known GTFS trip |
+| TripUpdates | [`data/realtime/trip_updates.pb`](data/realtime/trip_updates.pb) (+ `.json.gz`) | 6,064 trips |
+
+How trips are matched: a live bus id is `<ddmmyyyy>_<trip_id>`, so every bus on a published service carries its exact `trip_id` and `start_date`; stop times ahead are the timetable plus how late the bus is running now (it has not reached its next stop and that stop's time has passed). The generator is [`tools/gtfs_rt.py`](tools/gtfs_rt.py)
+(`gtfs_rt.py index apsrtc apsrtc-gtfs.zip rt_index.json`, then `gtfs_rt.py serve …`); the samples are one snapshot.
+Live feeds, refreshed every 30 s, are being switched on at `https://maps.reclaim.city/apsrtc/rt/vehicle_positions.pb`
+and `…/trip_updates.pb`.
 
 ## Use it
 
