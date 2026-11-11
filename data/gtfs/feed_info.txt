@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,feed_version,feed_contact_url
+reclaim.city,https://maps.reclaim.city/apsrtc/,en,202611111411,https://github.com/reclaimchennai/apsrtc

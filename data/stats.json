@@ -1,0 +1,52 @@
+{
+ "routes": 5095,
+ "routes_corridors": 4633,
+ "routes_city": 507,
+ "trips": 54812,
+ "trips_from_neo2308": 462,
+ "stop_times": 615001,
+ "stops": 11156,
+ "shapes": 11631,
+ "service_types": {
+  "OTHER": 592,
+  "EXPRESS": 299,
+  "ULTRA DELUXE": 28,
+  "SUPER LUXURY": 43,
+  "PALLEVELUGU": 3101,
+  "SAPTAGIRI EXPRESS": 10,
+  "METRO EXPRESS": 81,
+  "INDRA AC": 1,
+  "METRO LUXURY A/C": 2,
+  "ULTRA PALLEVELUGU": 45,
+  "CITY ORDINARY": 424,
+  "AERO EXPRESS": 3,
+  "PARKING": 1,
+  "GREEN SAPTAGIRI(2+2 AC EV)": 1,
+  "GREEN SAPTAGIRI(2+2 AC GHAT EV)": 2
+ },
+ "service_days": 407547,
+ "days": [
+  "2026-11-03",
+  "2026-11-04",
+  "2026-11-05",
+  "2026-11-06",
+  "2026-11-07",
+  "2026-11-08",
+  "2026-11-09",
+  "2026-11-10",
+  "2026-11-11"
+ ],
+ "stop_delays": 469848,
+ "punctuality_rows": 4202776,
+ "punctuality_days": [
+  "2026-11-03",
+  "2026-11-04",
+  "2026-11-05",
+  "2026-11-06",
+  "2026-11-07",
+  "2026-11-08",
+  "2026-11-09",
+  "2026-11-10"
+ ],
+ "feed_version": "202611111411"
+}
